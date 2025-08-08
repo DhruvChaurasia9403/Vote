@@ -1,7 +1,4 @@
 import 'package:flip_card/flip_card.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:startup_idea_evaluator/presentation/screens/tutorial_overlay.dart';
 
 import '../../data/models/idea_model.dart';
 import '../../logic/idea_bloc/idea_bloc.dart';
