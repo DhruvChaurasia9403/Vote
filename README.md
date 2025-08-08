@@ -31,13 +31,9 @@ IdeaShare is designed for clarity and focus. It blends a minimalist visual langu
 
 * **BLoC State Management** — Clear separation of UI and business logic for testability and scalability.
 * **Dual Themes** — A clean Light theme and a refined Dark theme (user preference persisted).
-* **Interactive Idea Cards**
-
-  * Tap or swipe to flip and view score breakdown.
-  * Only one card may be flipped at once.
-  * Animated upvote/downvote with live vote count updates.
-* **Local Persistence** — Ideas and votes persisted via `shared_preferences`.
-* **Polished Animations** — Animated backgrounds, hero transitions, and staggered entry animations.
+* **Interactive Idea Cards** — Tap/swipe to flip and view score breakdown, one card at a time, with animated voting.
+* **Local Persistence** — Data stored with `shared_preferences`.
+* **Polished Animations** — Animated backgrounds, hero transitions, staggered entry effects.
 * **Onboarding** — One-time guided overlay for first-time users.
 
 ---
@@ -82,22 +78,24 @@ lib/
 
 ## Assets
 
-Ensure the following images are placed in the `assets/` folder and declared in `pubspec.yaml`.
+Ensure the following images exist in `assets/` and are declared in `pubspec.yaml`.
 
-**Files (all `.jpg`)**
+**Files:**
 
-* `assets/l1.jpg`
-* `assets/l2.jpg`
-* `assets/l3.jpg`
-* `assets/l4.jpg`
-* `assets/l11.jpg` (main light image)
-* `assets/d1.jpg`
-* `assets/d2.jpg`
-* `assets/d3.jpg`
-* `assets/d4.jpg`
-* `assets/d11.jpg` (main dark image)
+```
+assets/l1.jpg
+assets/l2.jpg
+assets/l3.jpg
+assets/l4.jpg
+assets/l11.jpg
+assets/d1.jpg
+assets/d2.jpg
+assets/d3.jpg
+assets/d4.jpg
+assets/d11.jpg
+```
 
-**`pubspec.yaml` snippet**
+**pubspec.yaml snippet:**
 
 ```yaml
 flutter:
@@ -114,106 +112,84 @@ flutter:
     - assets/d11.jpg
 ```
 
-**Use in Dart**
+**Dart usage:**
 
 ```dart
 final imageAsset = isDarkMode ? 'assets/d11.jpg' : 'assets/l11.jpg';
-return Image.asset(imageAsset, fit: BoxFit.cover);
+Image.asset(imageAsset, fit: BoxFit.cover);
 ```
+
+*Tip: Ensure images are committed to the repository and `flutter pub get` is run after updating pubspec.yaml.*
 
 ---
 
 ## Theming & UI Notes
 
-* **Light Theme**: White base with restrained blues and neutral greys for hierarchy.
-* **Dark Theme**: Deep black with muted light-blue accents for a premium feel.
-* **Animated Background**: Implement as a reusable widget that renders subtle, animated gradients. Keep saturation low and transitions smooth for a composed appearance.
+* **Light Theme:** White base with subtle blues and greys.
+* **Dark Theme:** Deep black with muted light-blue accents.
+* **Animated Background:** Reusable widget with smooth, low-saturation gradients.
 
 ---
 
 ## State Management & Persistence
 
-* BLoC files live under `lib/logic/idea_bloc/`.
-* `shared_preferences` stores:
-
-  * Serialized idea list
-  * Per-user vote map
-  * Theme preference
-  * Onboarding completion flag
-
-**Persistence pattern**
-
-1. On app start, read cached ideas and votes.
-2. Hydrate BLoC state with persisted data.
-3. On change (new idea, vote), update the cache asynchronously and emit updated BLoC state.
+* BLoC pattern under `lib/logic/idea_bloc/`.
+* `shared_preferences` stores serialized ideas, votes, theme preference, onboarding flag.
+* On app start → load cache → hydrate state → persist on updates.
 
 ---
 
 ## Screens
 
-* **Listing Screen** — Displays all ideas (staggered reveal animations).
-* **Submission Screen** — Animated, validated form for new ideas.
-* **Leaderboard Screen** — Ordered by votes and AI-derived score.
+* **Listing Screen** — Staggered animations.
+* **Submission Screen** — Animated, validated form.
+* **Leaderboard Screen** — Sorted by votes and score.
 * **Drawer / Settings** — Theme toggle, onboarding replay.
 
 ---
 
 ## Usage Examples
 
-### Flip card logic
-
-* Keep a single `flippedIdeaId` in the `IdeaBloc` state.
-* Flipping sets `flippedIdeaId = ideaId`; tapping a different card replaces it.
-* Tapping a flipped card again clears the `flippedIdeaId`.
-
-### Vote action
-
-* Maintain a `Map<String, VoteState>` in local storage keyed by idea id.
-* On upvote/downvote:
-
-  1. Optimistically update BLoC state (triggers UI animation).
-  2. Persist vote change to `shared_preferences`.
-  3. On failure, revert the change and show subtle feedback.
+**Flip Card:** Keep `flippedIdeaId` in state; replace or clear on tap.
+**Voting:** Optimistically update state, persist with `shared_preferences`, revert on failure.
 
 ---
 
 ## Screenshots & Video
 
-Replace placeholders with project assets. The demo video link is included below.
+| Light Mode               | Dark Mode               |
+| ------------------------ | ----------------------- |
+| ![Light](assets/l11.jpg) | ![Dark](assets/d11.jpg) |
 
-**Screenshots**
+| Listing (Light)      | Listing (Dark)       |
+| -------------------- | -------------------- |
+| ![L1](assets/l1.jpg) | ![D1](assets/d1.jpg) |
 
-|    Light Mode    |     Dark Mode    |
-| :--------------: | :--------------: |
-| `assets/l11.jpg` | `assets/d11.jpg` |
+| Flipped (Light)      | Flipped (Dark)       |
+| -------------------- | -------------------- |
+| ![L2](assets/l2.jpg) | ![D2](assets/d2.jpg) |
 
-| Listing Screen (Light) | Listing Screen (Dark) |
-| :--------------------: | :-------------------: |
-|     `assets/l1.jpg`    |    `assets/d1.jpg`    |
+| Listing (Light)      | Listing (Dark)       |
+|----------------------|----------------------|
+| ![L1](assets/l3.jpg) | ![D1](assets/d3.jpg) |
 
-| Flipped Card (Light) | Flipped Card (Dark) |
-| :------------------: | :-----------------: |
-|    `assets/l2.jpg`   |   `assets/d2.jpg`   |
+| Flipped (Light)      | Flipped (Dark)       |
+|----------------------|----------------------|
+| ![L2](assets/l4.jpg) | ![D2](assets/d4.jpg) |
 
-**Video Demo**
-
-IdeaShare Demo Video: [https://drive.google.com/file/d/1hYEG70ylsR4o45SWZkO7tuv0COphH4RT/view?usp=drivesdk](https://drive.google.com/file/d/1hYEG70ylsR4o45SWZkO7tuv0COphH4RT/view?usp=drivesdk)
+**Video Demo:** [IdeaShare Demo](https://drive.google.com/file/d/1hYEG70ylsR4o45SWZkO7tuv0COphH4RT/view?usp=drivesdk)
 
 ---
 
 ## Contributing
 
-1. Fork the repository.
-2. Create a feature branch: `git checkout -b feature/your-feature`.
-3. Commit changes with clear messages.
-4. Open a pull request with a detailed description and screenshots where appropriate.
+1. Fork
+2. Create branch: `git checkout -b feature/your-feature`
+3. Commit with clear messages
+4. Open a PR with description & screenshots
 
 ---
 
 ## License
 
-This project is licensed under the MIT License. See `LICENSE.md` for details.
-
----
-
-*Prepared for publication — replace placeholders (repo URL, screenshots, video link, license) with real assets before release.*
+MIT — see `LICENSE.md`
