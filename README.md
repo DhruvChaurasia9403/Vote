@@ -1,32 +1,44 @@
-# IdeaShare: Startup Idea Evaluator
+# IdeaShare — Startup Idea Evaluator
 
-## Project Overview
-
-IdeaShare is a dynamic and interactive Flutter application designed for brainstorming, sharing, and evaluating startup ideas. It provides a platform for users to submit their concepts, receive an AI-generated viability score, and vote on other submissions. The app features a clean, minimalist user interface with distinct light and dark themes, engaging animations, and persistent local storage to ensure a seamless user experience.
-
-The application is built using modern Flutter practices, with a focus on clean architecture, state management using BLoC, and a highly interactive, animated UI.
+A refined, well-structured Flutter application for capturing, sharing, and evaluating startup ideas. IdeaShare presents a polished interface, thoughtful animations, and robust local persistence so users can submit ideas, receive an AI-derived viability score, and vote on submissions — all with a calm, premium experience.
 
 ---
 
-## Features
+## Table of Contents
 
-- **State Management**: Utilizes the BLoC (Business Logic Component) pattern for robust and scalable state management, ensuring a clean separation between UI and business logic.
-- **Dynamic Theming**: Switch between a clean White/Blue/Grey light theme and a sleek Black/Light Blue dark theme. The user's preference is saved locally and persists across app launches.
-- **Interactive Idea Cards**:
-    - **Flip Animation**: Tap the AI score or swipe horizontally on an idea card to flip it over and view a detailed score breakdown.
-    - **Single Flipped Card**: The application ensures only one card can be in a flipped state at any given time, providing a clean and focused user experience.
-    - **Upvote/Downvote System**: Users can cast or retract their vote on any idea. The vote count updates in real-time with a satisfying animation.
-- **Local Data Persistence**: All ideas and user votes are saved locally on the device using `shared_preferences`, ensuring data is retained between sessions.
-- **Engaging UI & Animations**:
-    - **Animated Backgrounds**: Subtle, constantly shifting gradients on every screen provide a dynamic and premium feel.
-    - **Staggered List Animations**: Lists of ideas and leaderboard entries animate into view gracefully.
-    - **Hero Animations**: Smooth transitions for key UI elements.
-- **User Onboarding**: A one-time tutorial overlay guides new users, highlighting the main navigation and action buttons.
-- **Core Screens**:
-    - **Listing Screen**: Displays all submitted ideas.
-    - **Submission Screen**: A modern, animated form for submitting new ideas.
-    - **Leaderboard Screen**: Ranks the top-voted ideas with a distinct visual hierarchy.
-    - **Navigation Drawer**: Provides easy access to all app sections and the theme switcher.
+1. [Project Overview](#project-overview)
+2. [Key Features](#key-features)
+3. [Getting Started](#getting-started)
+4. [Project Structure](#project-structure)
+5. [Assets](#assets)
+6. [Theming & UI Notes](#theming--ui-notes)
+7. [State Management & Persistence](#state-management--persistence)
+8. [Screens](#screens)
+9. [Usage Examples](#usage-examples)
+10. [Screenshots & Video](#screenshots--video)
+11. [Contributing](#contributing)
+12. [License](#license)
+
+---
+
+## Project Overview
+
+IdeaShare is designed for clarity and focus. It blends a minimalist visual language with subtle motion — animated backgrounds, staggered list reveals, and elegant card flip transitions — while maintaining a disciplined codebase based on BLoC. The application stores data locally so the experience is uninterrupted and private.
+
+---
+
+## Key Features
+
+* **BLoC State Management** — Clear separation of UI and business logic for testability and scalability.
+* **Dual Themes** — A clean Light theme and a refined Dark theme (user preference persisted).
+* **Interactive Idea Cards**
+
+  * Tap or swipe to flip and view score breakdown.
+  * Only one card may be flipped at once.
+  * Animated upvote/downvote with live vote count updates.
+* **Local Persistence** — Ideas and votes persisted via `shared_preferences`.
+* **Polished Animations** — Animated backgrounds, hero transitions, and staggered entry animations.
+* **Onboarding** — One-time guided overlay for first-time users.
 
 ---
 
@@ -34,69 +46,174 @@ The application is built using modern Flutter practices, with a focus on clean a
 
 ### Prerequisites
 
-- Flutter SDK (Version 3.0.0 or higher)
-- An IDE such as Android Studio or VS Code with the Flutter plugin.
+* Flutter SDK 3.0.0 or higher
+* Android Studio or VS Code with Flutter plugin
 
 ### Installation
 
-1.  **Clone the repository:**
-    ```sh
-    git clone <your-repository-url>
-    ```
-2.  **Navigate to the project directory:**
-    ```sh
-    cd startup_idea_evaluator
-    ```
-3.  **Install dependencies:**
-    ```sh
-    flutter pub get
-    ```
-4.  **Run the application:**
-    ```sh
-    flutter run
-    ```
+```bash
+git clone <your-repository-url>
+cd startup_idea_evaluator
+flutter pub get
+flutter run
+```
 
 ---
 
 ## Project Structure
 
-The project follows a clean architecture, separating concerns into distinct layers.
-
 ```
 lib/
 ├── data/
-│   ├── models/           # Contains the data models (e.g., idea_model.dart)
-│   └── sources/          # Handles data persistence (e.g., local_cache.dart)
+│   ├── models/           # idea_model.dart
+│   └── sources/          # local_cache.dart
 ├── logic/
-│   ├── idea_bloc/        # BLoC files for state management (bloc, event, state)
-│   └── theme_notifier.dart # Manages the application's theme state
+│   ├── idea_bloc/        # idea_bloc.dart, idea_event.dart, idea_state.dart
+│   └── theme_notifier.dart
 ├── presentation/
-│   ├── screens/          # All the main screens of the application
-│   └── widgets/          # Reusable widgets (e.g., idea_cards, app_drawer)
+│   ├── screens/          # listing, submission, leaderboard
+│   └── widgets/          # idea_card, animated_background, app_drawer
 ├── utils/
-│   └── vote_store.dart   # Utility for managing user vote data
-└── main.dart             # The main entry point of the application
+│   └── vote_store.dart   # vote management helper
+└── main.dart
 ```
 
 ---
 
-## Screenshots
+## Assets
 
-*(Please replace the placeholder text below with your actual screenshots)*
+Ensure the following images are placed in the `assets/` folder and declared in `pubspec.yaml`.
 
-| Light Mode | Dark Mode |
-| :---: | :---: |
-| <img src="[Insert Light Mode Listing Screen Screenshot Here]" width="300"> | <img src="[Insert Dark Mode Listing Screen Screenshot Here]" width="300"> |
-| *Listing Screen (Light)* | *Listing Screen (Dark)* |
-| <img src="[Insert Light Mode Card Back Screenshot Here]" width="300"> | <img src="[Insert Dark Mode Card Back Screenshot Here]" width="300"> |
-| *Flipped Card (Light)* | *Flipped Card (Dark)* |
-| <img src="[Insert Light Mode Submission Screen Screenshot Here]" width="300"> | <img src="[Insert Dark Mode Submission Screen Screenshot Here]" width="300"> |
-| *Submission Screen (Light)* | *Submission Screen (Dark)* |
+**Files (all `.jpg`)**
+
+* `assets/l1.jpg`
+* `assets/l2.jpg`
+* `assets/l3.jpg`
+* `assets/l4.jpg`
+* `assets/l11.jpg` (main light image)
+* `assets/d1.jpg`
+* `assets/d2.jpg`
+* `assets/d3.jpg`
+* `assets/d4.jpg`
+* `assets/d11.jpg` (main dark image)
+
+**`pubspec.yaml` snippet**
+
+```yaml
+flutter:
+  assets:
+    - assets/l1.jpg
+    - assets/l2.jpg
+    - assets/l3.jpg
+    - assets/l4.jpg
+    - assets/l11.jpg
+    - assets/d1.jpg
+    - assets/d2.jpg
+    - assets/d3.jpg
+    - assets/d4.jpg
+    - assets/d11.jpg
+```
+
+**Use in Dart**
+
+```dart
+final imageAsset = isDarkMode ? 'assets/d11.jpg' : 'assets/l11.jpg';
+return Image.asset(imageAsset, fit: BoxFit.cover);
+```
 
 ---
 
-## Video Demo
+## Theming & UI Notes
 
-A full video walkthrough of the application's features and animations can be found at the link below.
+* **Light Theme**: White base with restrained blues and neutral greys for hierarchy.
+* **Dark Theme**: Deep black with muted light-blue accents for a premium feel.
+* **Animated Background**: Implement as a reusable widget that renders subtle, animated gradients. Keep saturation low and transitions smooth for a composed appearance.
 
-**[Insert Your Google Drive or YouTube Video Link Here]**
+---
+
+## State Management & Persistence
+
+* BLoC files live under `lib/logic/idea_bloc/`.
+* `shared_preferences` stores:
+
+  * Serialized idea list
+  * Per-user vote map
+  * Theme preference
+  * Onboarding completion flag
+
+**Persistence pattern**
+
+1. On app start, read cached ideas and votes.
+2. Hydrate BLoC state with persisted data.
+3. On change (new idea, vote), update the cache asynchronously and emit updated BLoC state.
+
+---
+
+## Screens
+
+* **Listing Screen** — Displays all ideas (staggered reveal animations).
+* **Submission Screen** — Animated, validated form for new ideas.
+* **Leaderboard Screen** — Ordered by votes and AI-derived score.
+* **Drawer / Settings** — Theme toggle, onboarding replay.
+
+---
+
+## Usage Examples
+
+### Flip card logic
+
+* Keep a single `flippedIdeaId` in the `IdeaBloc` state.
+* Flipping sets `flippedIdeaId = ideaId`; tapping a different card replaces it.
+* Tapping a flipped card again clears the `flippedIdeaId`.
+
+### Vote action
+
+* Maintain a `Map<String, VoteState>` in local storage keyed by idea id.
+* On upvote/downvote:
+
+  1. Optimistically update BLoC state (triggers UI animation).
+  2. Persist vote change to `shared_preferences`.
+  3. On failure, revert the change and show subtle feedback.
+
+---
+
+## Screenshots & Video
+
+Replace placeholders with project assets. The demo video link is included below.
+
+**Screenshots**
+
+|    Light Mode    |     Dark Mode    |
+| :--------------: | :--------------: |
+| `assets/l11.jpg` | `assets/d11.jpg` |
+
+| Listing Screen (Light) | Listing Screen (Dark) |
+| :--------------------: | :-------------------: |
+|     `assets/l1.jpg`    |    `assets/d1.jpg`    |
+
+| Flipped Card (Light) | Flipped Card (Dark) |
+| :------------------: | :-----------------: |
+|    `assets/l2.jpg`   |   `assets/d2.jpg`   |
+
+**Video Demo**
+
+IdeaShare Demo Video: [https://drive.google.com/file/d/1hYEG70ylsR4o45SWZkO7tuv0COphH4RT/view?usp=drivesdk](https://drive.google.com/file/d/1hYEG70ylsR4o45SWZkO7tuv0COphH4RT/view?usp=drivesdk)
+
+---
+
+## Contributing
+
+1. Fork the repository.
+2. Create a feature branch: `git checkout -b feature/your-feature`.
+3. Commit changes with clear messages.
+4. Open a pull request with a detailed description and screenshots where appropriate.
+
+---
+
+## License
+
+This project is licensed under the MIT License. See `LICENSE.md` for details.
+
+---
+
+*Prepared for publication — replace placeholders (repo URL, screenshots, video link, license) with real assets before release.*
