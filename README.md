@@ -161,8 +161,8 @@ Image.asset(imageAsset, fit: BoxFit.cover);
 | ------------------------ | ----------------------- |
 | ![Light](assets/l11.jpg) | ![Dark](assets/d11.jpg) |
 
-| Listing (Light)      | Listing (Dark)       |
-| -------------------- | -------------------- |
+| Leaderboard (Light)  | Leaderboard (Dark)   |
+|----------------------|----------------------|
 | ![L1](assets/l1.jpg) | ![D1](assets/d1.jpg) |
 
 | Flipped (Light)      | Flipped (Dark)       |
@@ -173,8 +173,8 @@ Image.asset(imageAsset, fit: BoxFit.cover);
 |----------------------|----------------------|
 | ![L1](assets/l3.jpg) | ![D1](assets/d3.jpg) |
 
-| Flipped (Light)      | Flipped (Dark)       |
-|----------------------|----------------------|
+| Idea Submit (Light)  | Idea Submit (Dark)  |
+|----------------------|---------------------|
 | ![L2](assets/l4.jpg) | ![D2](assets/d4.jpg) |
 
 **Video Demo:** [IdeaShare Demo](https://drive.google.com/file/d/1hYEG70ylsR4o45SWZkO7tuv0COphH4RT/view?usp=drivesdk)
